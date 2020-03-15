@@ -4,12 +4,12 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(express.json());
+process.env.NODE_ENV === 'development' ? morgan('dev') : '';
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cors(''));
-if(process.env.NODE_ENV === 'development') {
-  morgan('dev');
-}
 
+app.use('/api/v1/users', require('./routes/UserRouter'));
+app.use('/api/v1/auth', require('./routes/AuthRouter'));
 
 module.exports = app;

@@ -10,13 +10,11 @@ dotenv.config({
 });
 
 mongoose.connect(
-  process.env.MONGODB_LOCAL,
-  {
+  process.env.MONGODB_LOCAL, {
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-  }
-).then(console.log('Database connectino successfull'));
+    useFindAndModify: true,
+    useUnifiedTopology: true,
+}).then(console.log('Database connectino successfull'));
 
 const PORT = process.env.PORT || 3000;
 
