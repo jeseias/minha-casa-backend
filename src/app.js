@@ -15,5 +15,6 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 app.use('/api/v1/users', require('./routes/UserRouter'));
 app.use('/api/v1/auth', require('./routes/AuthRouter'));
 app.use('/api/v1/houses', require('./routes/HouseRouter'));
+app.use('/api/v1/messages', require('./routes/ContactRouter'));
 
 module.exports = app;

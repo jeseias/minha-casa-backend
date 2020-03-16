@@ -12,7 +12,7 @@ dotenv.config({
 mongoose.connect(
   process.env.MONGODB_LOCAL, {
     useNewUrlParser: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useUnifiedTopology: true,
 }).then(console.log('Database connection successfull'));
 
