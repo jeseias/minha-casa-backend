@@ -14,7 +14,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
-}).then(console.log('Database connectino successfull'));
+}).then(console.log('Database connection successfull'));
 
 const PORT = process.env.PORT || 3000;
 
