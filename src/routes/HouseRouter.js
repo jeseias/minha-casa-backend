@@ -5,7 +5,7 @@ const uploadConfig = require('./../config/multer');
 
 const upload = multer(uploadConfig);
 
-const { createHouse, getHouse, getOneHouse } = require('./../controllers/HouseController');
+const { createHouse, getHouse, getOneHouse, eliminateHouse } = require('./../controllers/HouseController');
 
 router
   .route('/')
@@ -14,6 +14,7 @@ router
 
 router
   .route('/:id')
+  .delete(eliminateHouse)
   .get(getOneHouse)
 
 module.exports = router;

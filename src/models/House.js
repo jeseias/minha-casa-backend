@@ -12,10 +12,13 @@ const HouseSchema = new mongoose.Schema({
 }, {
   toJSON: {
     virtuals: true,
+  },
+  toObject: {
+    virtuals: true,
   }
 });
 
-HouseSchema.virtual('thumbnail', function() {
+HouseSchema.virtual('thumbnail').get( function() {
   return `${process.env.LOCATION}/files/${this.main_img}`;
 });
 

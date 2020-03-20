@@ -12,7 +12,7 @@ UserSchema.pre('save', async function(next) {
   next();
 });
 
-UserSchema.methods.correntPassword = async function(
+UserSchema.methods.correctPassword = async function(
   candidatePassword, 
   userPassord
 ) {

@@ -19,7 +19,7 @@ exports.getAllMessage = async (req, res, next) => {
   try {
     const messages = await Contact.find({});
 
-    return res.status(302).json({
+    return res.status(200).json({
       results: messages.length,
       messages
     });
@@ -34,7 +34,7 @@ exports.getOneMessage = async (req, res, next) => {
   try {
     const message = await Contact.findById(req.params.id);
 
-    return res.status(302).json(message)
+    return res.status(200).json(message)
   } catch (err) {
     return res.status(500).json({
       err: 'Houve um erro tente novamente',
@@ -46,7 +46,6 @@ exports.alreadyRead = async (req, res, next) => {
   try {
     const message = await Contact.findByIdAndUpdate(req.params.id, req.body);
     
-    console.log(message)
     return res.status(200).json(message);
   } catch (err) {
     return res.status(500).json({
