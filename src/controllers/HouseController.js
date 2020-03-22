@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const House = require('./../models/House');
 
 exports.createHouse = async (req, res, next) => {
@@ -29,7 +31,7 @@ exports.createHouse = async (req, res, next) => {
 exports.getHouse = async (req, res, next) => {
   try {
     const houses = await House.find({});
-    houses.reverse();
+    houses.reverse().splice(req.query.items);
     return res.status(200).json(houses);
   } catch (err) {
     return res.status(500).json({
@@ -52,11 +54,18 @@ exports.getOneHouse = async (req, res, next) => {
 
 exports.eliminateHouse = async (req, res, next) => {
   try {
-    await House.findByIdAndDelete(req.params.id);
-    return res.status(200).json({ deleted: true })
+    const house = await House.findByIdAndDelete(req.params.id);
+
+    house.images.forEach(img => {
+      fs.unlinkSync(path.resolve(__dirname, '..', '..', 'uploads', `${img}`), err => {
+        if (err) throw err;
+      });
+    });
+    return res.status(200).json({ deleted: true });
   } catch (err) {
     return res.status(500).json({
       err: 'Houve um erro tene novamente',
     });
   }
 }
+
