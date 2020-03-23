@@ -13,7 +13,7 @@ exports.createHouse = async (req, res, next) => {
       tipo,
       norooms,
       description,
-      main_img: req.files[req.files.length - 1].filename,
+      main_img: req.files[0].filename,
       images: req.files.map(file => file.filename)
     }); 
 
@@ -31,7 +31,9 @@ exports.createHouse = async (req, res, next) => {
 exports.getHouse = async (req, res, next) => {
   try {
     const houses = await House.find({});
-    houses.reverse().splice(req.query.items);
+    houses.reverse()
+    
+    req.query.items ? houses.splice(req.query.items) : houses;
     return res.status(200).json(houses);
   } catch (err) {
     return res.status(500).json({
