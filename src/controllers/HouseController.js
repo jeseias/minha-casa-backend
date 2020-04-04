@@ -29,12 +29,17 @@ exports.createHouse = async (req, res, next) => {
 }
 
 exports.getHouse = async (req, res, next) => {
+  let limitItems;
   try {
     const houses = await House.find({});
     houses.reverse()
     
+    req.query.items >= houses.length ? limitItems = true : limitItems = false;
     req.query.items ? houses.splice(req.query.items) : houses;
-    return res.status(200).json(houses);
+    return res.status(200).json({
+      limitItems,
+      houses
+    });
   } catch (err) {
     return res.status(500).json({
       err: 'Houve um erro tente novamente',

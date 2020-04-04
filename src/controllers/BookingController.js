@@ -1,13 +1,8 @@
 const Booking = require('./../models/Booking');
 
 exports.newBook = async (req, res, next) => {
-  const { name, telefone } = req.body;
   try {
-    const Book = await Booking.create({
-      name,
-      telefone,
-      house: req.headers.house_id
-    });
+    const Book = await Booking.create(req.body);
 
     return res.status(201).json({
       status: 'success',
@@ -25,10 +20,7 @@ exports.getAllBooking = async (req, res, next) => {
   try {
     const bookings = await Booking.find({}).populate('house');
 
-    return res.status(200).json({
-      status: 'success',
-      bookings
-    });
+    return res.status(200).json(bookings.reverse());
   } catch (err) {
     return res.status(500).json({
       status: 'fail',
