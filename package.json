@@ -6,7 +6,8 @@
   "author": "jeseias domingos",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start": "node src/server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
