@@ -1,1 +1,1 @@
-web: yarn stat
+web: yarn start
