@@ -6,7 +6,7 @@
   "author": "jeseias domingos",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon",
+    "dev": "nodemon",
     "start": "node src/server"
   },
   "dependencies": {
