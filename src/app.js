@@ -18,4 +18,11 @@ app.use('/api/v1/houses', require('./routes/HouseRouter'));
 app.use('/api/v1/bookings', require('./routes/BookingRouter'));
 app.use('/api/v1/messages', require('./routes/ContactRouter'));
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Minha casa working fine'
+  })
+})
+
 module.exports = app;
