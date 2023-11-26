@@ -4,9 +4,14 @@ const HouseSchema = new mongoose.Schema({
   location: String,
   location_long: String,
   price: Number,
-  tipo:  String,
+  type:  String,
   main_img: String,
-  norooms: Number,
+  block: {
+    type: Number,
+    enum: [1,2,3,4,5,6,7,8,9,10,11,12,13]
+  },
+  building: String,
+  number_of_rooms: Number,
   description: String,
   images: [String]
 }, {

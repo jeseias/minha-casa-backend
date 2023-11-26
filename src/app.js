@@ -9,7 +9,11 @@ const app = express();
 process.env.NODE_ENV === 'development' ? morgan('dev') : '';
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors(''));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 app.use('/api/v1/users', require('./routes/UserRouter'));

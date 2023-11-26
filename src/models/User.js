@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
   name: String,
-  telefone: Number,
+  phone: Number,
   password: String
 });
 
@@ -14,9 +14,9 @@ UserSchema.pre('save', async function(next) {
 
 UserSchema.methods.correctPassword = async function(
   candidatePassword, 
-  userPassord
+  userPassword
 ) {
-  return await bcrypt.compare(candidatePassword, userPassord)
+  return await bcrypt.compare(candidatePassword, userPassword);
 }
 
 const User = mongoose.model('User', UserSchema);

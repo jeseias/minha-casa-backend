@@ -3,18 +3,25 @@ const path = require('path');
 const House = require('./../models/House');
 
 exports.createHouse = async (req, res, next) => {
-  const { location, location_long, price, tipo, norooms, description } = req.body;
+  const {
+    price,
+    tipo,
+    norooms,
+    description,
+    block,
+    building,
+  } = req.body;
   try {
     const housenames = req.files.map(file => file.filename);
     const house = await House.create({
-      location,
-      location_long,
+      block,
+      building,
       price,
       tipo,
       norooms,
       description,
       main_img: req.files[0].filename,
-      images: req.files.map(file => file.filename)
+      images: req.files.map((file) => file.filename),
     }); 
 
     return res.status(201).json({
