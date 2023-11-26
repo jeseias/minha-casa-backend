@@ -3,34 +3,28 @@ const path = require('path');
 const House = require('./../models/House');
 
 exports.createHouse = async (req, res, next) => {
-  const {
-    price,
-    tipo,
-    norooms,
-    description,
-    block,
-    building,
-  } = req.body;
+  const { price, type, number_of_rooms, description, block, building } =
+    req.body;
   try {
-    const housenames = req.files.map(file => file.filename);
+    const housenames = req.files.map((file) => file.filename);
     const house = await House.create({
       block,
       building,
       price,
-      tipo,
-      norooms,
+      type,
+      number_of_rooms,
       description,
       main_img: req.files[0].filename,
       images: req.files.map((file) => file.filename),
-    }); 
+    });
 
     return res.status(201).json({
       result: housenames.length,
-      house 
+      house,
     });
   } catch (err) {
     return res.status(500).json({
-      err: 'Houve um erro tente novamente',
+      err: "Houve um erro tente novamente",
     });
   }
 }
@@ -40,6 +34,8 @@ exports.getHouse = async (req, res, next) => {
   try {
     const houses = await House.find({});
     houses.reverse()
+
+    console.log(houses[0]);
     
     req.query.items >= houses.length ? limitItems = true : limitItems = false;
     req.query.items ? houses.splice(req.query.items) : houses;
